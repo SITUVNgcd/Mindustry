@@ -1203,10 +1203,13 @@ abstract class BuildingComp implements Posc, Teamc, Healthc, Buildingc, Timerc, 
         block.drawOverlay(x, y, rotation);
     }
 
-    public void drawItemSelection(UnlockableContent selection){
-        if(selection != null && Core.settings.getBool("displayselection", true)){
-            TextureRegion region = selection.fullIcon;
-            Draw.rect(region, x, y + block.size * tilesize / 2f + 4, 8f * region.ratio(), 8f);
+    public void drawItemSelection(@Nullable UnlockableContent selection){
+        if(selection != null){
+            float dx = x - block.size * tilesize/2f, dy = y + block.size * tilesize/2f, s = iconSmall / 4f;
+            Draw.mixcol(Color.darkGray, 1f);
+            Draw.rect(selection.fullIcon, dx, dy - 1, s, s);
+            Draw.reset();
+            Draw.rect(selection.fullIcon, dx, dy, s, s);
         }
     }
 
@@ -2008,7 +2011,7 @@ abstract class BuildingComp implements Posc, Teamc, Healthc, Buildingc, Timerc, 
             case powerNetCapacity -> power == null ? 0 : power.graph.getLastCapacity();
             case enabled -> enabled ? 1 : 0;
             case controlled -> this instanceof ControlBlock c && c.isControlled() ? GlobalVars.ctrlPlayer : 0;
-            case payloadCount -> getPayload() != null ? 1 : 0;
+            case payloadCount -> (getPayloads() != null ? getPayloads().total() : 0) + (getPayload() != null ? 1 : 0);
             case size -> block.size;
             case cameraX, cameraY, cameraWidth, cameraHeight -> this instanceof ControlBlock c ? c.unit().sense(sensor) : 0;
             default -> Float.NaN; //gets converted to null in logic
