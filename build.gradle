@@ -259,8 +259,6 @@ project(":desktop"){
     dependencies{
         implementation project(":core")
         implementation arcModule("extensions:discord")
-        implementation arcModule("natives:natives-filedialogs")
-        implementation arcModule("extensions:filedialogs")
         implementation arcModule("natives:natives-desktop")
         implementation arcModule("natives:natives-freetype-desktop")
 
@@ -268,7 +266,7 @@ project(":desktop"){
 
         implementation "com.github.Anuken:steamworks4j:$steamworksVersion"
 
-        implementation arcModule("backends:backend-sdl")
+        implementation arcModule("backends:backend-sdl3")
     }
 }
 
