@@ -186,7 +186,7 @@ public class TileableLogicDisplay extends LogicDisplay{
                         Draw.proj(0, 0, root.buffer.width, root.buffer.height);
 
                         //clear the buffer - some OSs leave garbage in it
-                        root.buffer.begin(Pal.darkerMetal);
+                        root.buffer.begin(backgroundColor);
                         if(root.prevBuffers != null){
                             for(var other : root.prevBuffers){
                                 Draw.rect(Draw.wrap(other.buffer.texture), (other.x - originX) * 32 + other.buffer.width / 2f, (other.y - originY) * 32 + other.buffer.height / 2f, other.buffer.width, -other.buffer.height);
